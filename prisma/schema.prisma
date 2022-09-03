@@ -9,3 +9,76 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum Enum_Status {
+  NoAsignado
+  Asignado
+  Entregado
+  Cancelado
+}
+
+enum Enum_Role {
+  Admin
+  DeliveryBoy
+}
+
+model Client {
+  id       String  @id @default(cuid())
+  document String  @unique
+  email    String  @unique
+  address  String
+  phone    String
+  name     String
+  orders   Order[]
+
+  cretedAt  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id          String @id @default(cuid())
+  name        String
+  price       String
+  description String
+  order       Order  @relation(fields: [orderId], references: [id])
+  orderId     String
+
+  cretedAt  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id         String    @id @default(cuid())
+  client     Client?   @relation(fields: [clientId], references: [id])
+  clientId   String?
+  products   Product[]
+  dispatch   Dispatch?
+
+  cretedAt  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Dispatch {
+  id           String      @id @default(cuid())
+  deliveryCost Float
+  serviceScore Int
+  status       Enum_Status
+  dispatchTime DateTime
+  deliveryTime DateTime
+  user         User        @relation(fields: [userId], references: [id])
+  userId       String
+  order        Order       @relation(fields: [orderId], references: [id])
+  orderId      String @unique
+
+  cretedAt  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id         String     @id @default(cuid())
+  role       Enum_Role
+  dispatches Dispatch[]
+
+  cretedAt  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
