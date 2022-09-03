@@ -36,7 +36,7 @@ model Client {
 }
 
 model Product {
-  id          String @id @default(cuid())
+  id          String  @id @default(cuid())
   name        String
   price       String
   description String
@@ -48,11 +48,11 @@ model Product {
 }
 
 model Order {
-  id         String    @id @default(cuid())
-  client     Client   @relation(fields: [clientId], references: [id])
-  clientId   String
-  products   Product[]
-  dispatch   Dispatch?
+  id       String    @id @default(cuid())
+  client   Client    @relation(fields: [clientId], references: [id])
+  clientId String
+  products Product[]
+  dispatch Dispatch?
 
   cretedAt  DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -68,7 +68,7 @@ model Dispatch {
   user         User        @relation(fields: [userId], references: [id])
   userId       String
   order        Order       @relation(fields: [orderId], references: [id])
-  orderId      String @unique
+  orderId      String      @unique
 
   cretedAt  DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -77,6 +77,8 @@ model Dispatch {
 model User {
   id         String     @id @default(cuid())
   role       Enum_Role
+  name       String
+  email      String
   dispatches Dispatch[]
 
   cretedAt  DateTime @default(now())
