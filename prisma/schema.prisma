@@ -40,8 +40,8 @@ model Product {
   name        String
   price       String
   description String
-  order       Order  @relation(fields: [orderId], references: [id])
-  orderId     String
+  order       Order?  @relation(fields: [orderId], references: [id])
+  orderId     String?
 
   cretedAt  DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -49,8 +49,8 @@ model Product {
 
 model Order {
   id         String    @id @default(cuid())
-  client     Client?   @relation(fields: [clientId], references: [id])
-  clientId   String?
+  client     Client   @relation(fields: [clientId], references: [id])
+  clientId   String
   products   Product[]
   dispatch   Dispatch?
 
