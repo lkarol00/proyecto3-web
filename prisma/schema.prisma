@@ -40,23 +40,36 @@ model Product {
   name        String
   price       String
   description String
-  order       Order?  @relation(fields: [orderId], references: [id])
-  orderId     String?
+  product_order Product_Order[]
 
-  cretedAt  DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  cretedAt      DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
 }
 
 model Order {
   id       String    @id @default(cuid())
   client   Client    @relation(fields: [clientId], references: [id])
   clientId String
-  products Product[]
   dispatch Dispatch?
+  product_order Product_Order[]
 
-  cretedAt  DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  cretedAt      DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
 }
+
+model Product_Order {
+  product Product @relation(fields: [productId], references: [id])
+  productId String
+  order   Order   @relation(fields: [orderId], references: [id])
+  orderId   String
+  amount  Int
+
+  @@id([productId, orderId])
+
+  cretedAt      DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+}
+
 
 model Dispatch {
   id           String      @id @default(cuid())
