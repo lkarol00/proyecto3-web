@@ -65,6 +65,9 @@ model Product_Order {
   amount  Int
 
   @@id([productId, orderId])
+
+  cretedAt      DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
 }
 
 
