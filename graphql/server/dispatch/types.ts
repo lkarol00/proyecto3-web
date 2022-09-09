@@ -14,30 +14,6 @@ const dispatchTypes = gql`
     order: Order
   }
 
-  type Client {
-    id: ID
-    document: String
-    email: String
-    address: String
-    phone: String
-    name: String
-    orders: [Order]
-  }
-
-  type User {
-    id: ID
-    role: String
-    name: String
-    email: String
-  }
-
-  type Order {
-    id: ID
-    client: Client
-    clientID: String
-    products: Product
-  }
-
   input DispatchCreateInput {
     deliveryCost: Float
     status: String
@@ -59,3 +35,28 @@ const dispatchTypes = gql`
 `;
 
 export { dispatchTypes };
+
+// eslint-disable-next-line spaced-comment
+/*type Client {
+    id: ID
+    document: String
+    email: String
+    address: String
+    phone: String
+    name: String
+    orders: [Order]
+  }
+
+  type User {
+    id: ID
+    role: String
+    name: String
+    email: String
+  }
+
+  type Order {
+    id: ID
+    client: Client
+    clientID: String
+    products: Product
+  } */

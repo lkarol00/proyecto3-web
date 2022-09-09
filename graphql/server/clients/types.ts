@@ -11,11 +11,6 @@ const ClientTypes = gql`
     orders: [Order]
   }
 
-  type Order {
-    id: ID
-    client: Client
-  }
-
   input ClientCreateInfo {
     document: String
     email: String
