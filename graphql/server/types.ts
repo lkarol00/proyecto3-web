@@ -4,6 +4,7 @@ import { UserTypes } from '@graphql/server/user/type';
 import { OrderTypes } from '@graphql/server/order/types';
 import { productTypes } from '@graphql/server/product/types';
 import { dispatchTypes } from '@graphql/server/dispatch/types';
+import { ClientTypes } from '@graphql/server/clients/types';
 
 const CommonTypes = gql`
   scalar Date
@@ -15,6 +16,7 @@ const globalTypes: DocumentNode[] = [
   dispatchTypes,
   OrderTypes,
   UserTypes,
+  ClientTypes,
 ];
 
 export { globalTypes };
