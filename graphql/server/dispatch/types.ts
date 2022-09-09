@@ -20,8 +20,8 @@ const dispatchTypes = gql`
     serviceScore: Int
     dispatchTime: DateTime
     deliveryTime: DateTime
-    user_id: String
-    order_id: String
+    userId: String
+    orderId: String
   }
 
   type Query {

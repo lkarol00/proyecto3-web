@@ -3,11 +3,11 @@ import { Resolver } from 'types';
 
 const UserResolvers: Resolver = {
   Query: {
-    obtenerUsuarios: async () => {
+    getUsers: async () => {
       const users = await prisma.user.findMany();
       return users;
     },
-    obtenerUsuario: async (parent, args) => {
+    getUser: async (parent, args) => {
       const user = await prisma.user.findUnique({
         where: {
           id: args.id,
@@ -15,14 +15,14 @@ const UserResolvers: Resolver = {
       });
       return user;
     },
-    contarUsuarios: async () => {
+    countUsers: async () => {
       const conteo = await prisma.user.count();
 
       return conteo;
     },
   },
   Mutation: {
-    crearUsuario: async (parent, args) => {
+    createUser: async (parent, args) => {
       const newUser = await prisma.user.create({
         data: {
           role: args.data.role,

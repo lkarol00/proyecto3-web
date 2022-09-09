@@ -15,13 +15,13 @@ const UserTypes = gql`
   }
 
   type Query {
-    obtenerUsuarios: [User]
-    obtenerUsuario(id: String): User
-    contarUsuarios: Int
+    getUsers: [User]
+    getUser(id: String): User
+    countUsers: Int
   }
 
   type Mutation {
-    crearUsuario(data: UserCreateInput): User
+    createUser(data: UserCreateInput): User
     updateUser(id: String, name: String): User
     deleteUser(id: String): User
   }

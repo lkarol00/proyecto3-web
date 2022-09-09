@@ -39,8 +39,8 @@ const dispatchResolvers: Resolver = {
       const newDispatch = await prisma.dispatch.create({
         data: {
           deliveryCost: args.data.deliveryCost,
-          userId: args.data.user_id,
-          orderId: args.data.order_id,
+          userId: args.data.userId,
+          orderId: args.data.orderId,
           serviceScore: args.data.serviceScore,
           status: args.data.status,
           dispatchTime: args.data.dispatchTime,
