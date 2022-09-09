@@ -2,6 +2,18 @@ import { Resolver } from 'types';
 import prisma from '@config/prisma';
 
 const productResolvers: Resolver = {
+  Product: {
+    product_order: async (parent, args) => {
+      const productOrder = await prisma.product_Order.findMany({
+        where: {
+          productId: {
+            equals: parent.id,
+          },
+        },
+      });
+      return productOrder;
+    },
+  },
   Query: {
     getProducts: async () => {
       const products = await prisma.product.findMany();

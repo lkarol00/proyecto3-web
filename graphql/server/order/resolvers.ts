@@ -2,6 +2,26 @@ import prisma from '@config/prisma';
 import { Resolver } from 'types';
 
 const OrderResolvers: Resolver = {
+  Order: {
+    client: async (parent, args) => {
+      const client = await prisma.client.findUnique({
+        where: {
+          id: parent.clientId,
+        },
+      });
+      return client;
+    },
+    product_order: async (parent, args) => {
+      const productOrder = await prisma.product_Order.findMany({
+        where: {
+          orderId: {
+            equals: parent.id,
+          },
+        },
+      });
+      return productOrder;
+    },
+  },
   Query: {
     getOrders: async () => {
       const orders = await prisma.order.findMany();
@@ -17,11 +37,10 @@ const OrderResolvers: Resolver = {
     },
   },
   Mutation: {
-    crearOrder: async (parent, args) => {
+    createOrder: async (parent, args) => {
       const newOrder = await prisma.order.create({
         data: {
           id: args.data.id,
-          client: args.data.client,
           clientId: args.data.clientId,
         },
       });

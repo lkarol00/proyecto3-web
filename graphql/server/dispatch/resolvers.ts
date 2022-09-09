@@ -2,6 +2,24 @@ import { Resolver } from 'types';
 import prisma from '@config/prisma';
 
 const dispatchResolvers: Resolver = {
+  Dispatch: {
+    order: async (parent, args) => {
+      const order = await prisma.order.findUnique({
+        where: {
+          id: parent.orderId,
+        },
+      });
+      return order;
+    },
+    user: async (parent, args) => {
+      const user = await prisma.user.findUnique({
+        where: {
+          id: parent.userId,
+        },
+      });
+      return user;
+    },
+  },
   Query: {
     getDispatches: async () => {
       const dispatches = await prisma.dispatch.findMany();
@@ -21,8 +39,8 @@ const dispatchResolvers: Resolver = {
       const newDispatch = await prisma.dispatch.create({
         data: {
           deliveryCost: args.data.deliveryCost,
-          user: args.data.user_id,
-          order: args.data.order_id,
+          userId: args.data.user_id,
+          orderId: args.data.order_id,
           serviceScore: args.data.serviceScore,
           status: args.data.status,
           dispatchTime: args.data.dispatchTime,

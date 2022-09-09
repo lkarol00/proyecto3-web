@@ -6,7 +6,7 @@ const productTypes = gql`
     name: String
     price: String
     description: String
-    orderId: String
+    product_order: [Product_Order]
   }
 
   input ProductCreateInput {

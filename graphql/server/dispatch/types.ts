@@ -17,7 +17,9 @@ const dispatchTypes = gql`
   input DispatchCreateInput {
     deliveryCost: Float
     status: String
+    serviceScore: Int
     dispatchTime: DateTime
+    deliveryTime: DateTime
     user_id: String
     order_id: String
   }
@@ -35,28 +37,3 @@ const dispatchTypes = gql`
 `;
 
 export { dispatchTypes };
-
-// eslint-disable-next-line spaced-comment
-/*type Client {
-    id: ID
-    document: String
-    email: String
-    address: String
-    phone: String
-    name: String
-    orders: [Order]
-  }
-
-  type User {
-    id: ID
-    role: String
-    name: String
-    email: String
-  }
-
-  type Order {
-    id: ID
-    client: Client
-    clientID: String
-    products: Product
-  } */
